@@ -1,0 +1,87 @@
+---
+name: commit-message
+description: 当用户需要为 Git 改动编写或优化提交信息（commit message）时使用。典型信号：用户说"帮我写 commit message""这次改动怎么提交""提交说明怎么写""git commit 写啥"、刚看完 diff 准备提交、一次改了多处不知怎么概括、或现有提交信息太笼统（如"update""改了下"）需要改成规范写法。涉及关键词：commit message、提交信息、提交说明、git commit、Conventional Commits、feat/fix、commitizen、提交规范、changelog。
+---
+
+# Commit Message
+
+## 概述
+
+把一团 diff 提炼成规范、可追溯的提交信息。核心：一条提交说清"做了什么"和"为什么"，让未来的自己（和同事）能从提交历史里读懂项目演进。
+
+## 何时使用
+
+- 写完代码要提交，需要写 commit message
+- 改了多处，不知怎么概括
+- 现有提交信息太笼统（"update""fix bug"），要重写
+- 想统一团队提交规范
+
+**不该用**：还没写完代码（先写代码）；只想看 diff（用 `git diff`）。
+
+## 核心内容
+
+### 格式：Conventional Commits
+
+```
+<type>(<scope>): <subject>
+
+<body 可选：为什么改>
+```
+
+**type 选一个**：`feat`（新功能）、`fix`（修 bug）、`docs`（文档）、`refactor`（重构不改行为）、`test`（测试）、`chore`（构建/杂务）、`perf`（性能）。带可追溯业务变更的迁移脚本（如新增用户表）可算 `feat`，纯基础设施改动算 `chore`。
+
+### 从 diff 提炼三步
+
+1. **归类**：主要是加功能（feat）、修 bug（fix）、还是重构（refactor）？
+2. **定 scope**：影响哪个模块/文件？（如 `auth`、`api`、`ui`）可省略。
+3. **写 subject**：一行，祈使句，说"做了什么"不说"怎么做的"，≤50 字符。
+
+### 多处改动怎么办
+
+- **相关改动** → 一条提交，body 列要点
+- **不相关改动** → 拆成多条（用 `git add -p` 分块暂存）
+
+判断"相不相关"：这些改动服务于同一个目的吗？是 → 一条；否 → 拆。
+
+### body 写什么
+
+写**为什么**和**影响**，不写代码细节（代码自己会说话）：动机/背景、副作用/破坏性变更、关联 issue/PR（如 `Closes #123`）、破坏性变更用 `!` 或脚注 `BREAKING CHANGE:`。subject 够清楚的小改动可以只写 subject，别硬凑 body。
+
+### 语言
+
+subject 默认英文（Conventional Commits 生态惯例），中文团队也可中文——跟随仓库现有风格；body 可中文；用户明确偏好优先。
+
+### 例子
+
+**例 1（单改动）** — 把 useState 换成 useReducer：
+```
+refactor(auth): 用 useReducer 替换登录表单的状态管理
+
+复杂的状态转换用 reducer 更清晰，也为后续多步校验做准备。
+顺带修了 useEffect 未清理订阅导致的内存泄漏。
+```
+
+**例 2（多相关改动）** — 加登录接口 + 测试：
+```
+feat(auth): 实现邮箱密码登录接口
+
+- 新增 /api/login 端点
+- 加密码哈希校验
+- 补单元测试覆盖成功/失败场景
+```
+
+**例 3（该拆的）** — 登录接口、迁移脚本、README 三件不相关事，拆三条：
+```
+feat(auth): 实现登录接口
+chore(db): 添加用户表迁移脚本
+docs: 更新 README 部署说明
+```
+
+## 常见错误
+
+| 问题 | 修法 |
+|------|------|
+| 太笼统（"update""改了点"） | 写清 type + 具体做了什么 |
+| 一条提交塞多个无关改动 | 拆成多条 |
+| subject 写"怎么做"而非"做了什么" | "用 useReducer 替换"而非"改了 state 逻辑" |
+| 只说现象不说动机 | body 补上为什么 |
