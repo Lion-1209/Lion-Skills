@@ -1,0 +1,14 @@
+{
+  "name": "lion-skills",
+  "description": "Lion-Skills：个人自建的通用开发工作流 skills 套件",
+  "owner": {
+    "name": "Lion"
+  },
+  "plugins": [
+    {
+      "name": "lion-skills",
+      "description": "通用开发工作流 skills：commit-message、代码库上手、命名、错误处理、造 skill 的元方法",
+      "source": "./"
+    }
+  ]
+}
