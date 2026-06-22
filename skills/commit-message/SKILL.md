@@ -23,10 +23,18 @@ description: 当用户需要为 Git 改动编写或优化提交信息（commit m
 ### 格式：Conventional Commits
 
 ```
-<type>(<scope>): <subject>
+<type>(<scope>)<!>: <subject>
 
 <body 可选：为什么改>
+
+<footer 可选：BREAKING CHANGE: ... / Closes #123>
 ```
+
+**破坏性变更**（不向后兼容的改动）两种写法，二选一或并用：
+- **`!` 标记**：紧贴 type/scope 之后、冒号之前，如 `feat(api)!: 改用 token 鉴权替代 cookie`——一眼标红，提醒 reviewer 注意。
+- **脚注 `BREAKING CHANGE:`**：放 footer，写清破坏了什么、怎么迁移，如 `BREAKING CHANGE: /api/login 改为返回 token，前端需改用 Authorization 头`——给受影响方具体的迁移指引。
+
+破坏性变更必须二选一明确标注，别藏在普通提交里让下游踩坑。
 
 **type 选一个**：`feat`（新功能）、`fix`（修 bug）、`docs`（文档）、`refactor`（重构不改行为）、`test`（测试）、`chore`（构建/杂务）、`perf`（性能）。带可追溯业务变更的迁移脚本（如新增用户表）可算 `feat`，纯基础设施改动算 `chore`。
 
@@ -47,7 +55,7 @@ description: 当用户需要为 Git 改动编写或优化提交信息（commit m
 
 ### body 写什么
 
-写**为什么**和**影响**，不写代码细节（代码自己会说话）：动机/背景、副作用/破坏性变更、关联 issue/PR（如 `Closes #123`）、破坏性变更用 `!` 或脚注 `BREAKING CHANGE:`。subject 够清楚的小改动可以只写 subject，别硬凑 body。
+写**为什么**和**影响**，不写代码细节（代码自己会说话）：动机/背景、副作用/破坏性变更的迁移说明、关联 issue/PR（如 `Closes #123`）。破坏性变更的标注方式见上面「格式」节。subject 够清楚的小改动可以只写 subject，别硬凑 body。
 
 ### 语言
 
