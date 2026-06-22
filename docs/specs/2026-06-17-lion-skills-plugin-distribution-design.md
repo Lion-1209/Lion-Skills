@@ -5,6 +5,8 @@
 - **范围**：把 Lion-Skills 做成可一键安装的 Claude Code plugin
 - **前置**：5 个 skill 已实现并验证（见 `2026-06-16-lion-skills-design.md` 及后续 refactor 提交）
 
+> **文档定位**：本 spec 已完整实现——`.claude-plugin/marketplace.json`、`.claude-plugin/plugin.json`、`LICENSE`、README「怎么安装」节均已落地，与设计无偏差。
+
 ---
 
 ## 1. 背景与目标
