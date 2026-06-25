@@ -58,56 +58,43 @@ foreach ($s in $skills) {
 
 ### ZCode
 
-两种方式：
-
-**方式 A：当 plugin 装**（仓库已配 `.zcode-plugin/plugin.json`）。在 ZCode 里 `Agents Settings > Plugins > Discover` 安装，或按 ZCode plugin 文档操作。
-
-**方式 B：symlink 到用户级 skills 目录** `~/.zcode/skills/`：
+**拷贝到用户级 skills 目录** `~/.zcode/skills/`（已验证可生效）：
 
 ```bash
 # macOS/Linux
-for s in /path/to/Lion-Skills/skills/*/; do
-  ln -s "$s" "$HOME/.zcode/skills/$(basename "$s")"
-done
+cp -r /path/to/Lion-Skills/skills/* ~/.zcode/skills/
 ```
 
 ```powershell
 # Windows PowerShell
-$skills = Get-ChildItem "E:\path\to\Lion-Skills\skills" -Directory
-foreach ($s in $skills) {
-    New-Item -ItemType SymbolicLink -Path "$HOME\.zcode\skills\$($s.Name)" -Target $s.FullName
-}
+Copy-Item -Recurse "E:\path\to\Lion-Skills\skills\*" "$HOME\.zcode\skills\"
 ```
 
-> 注：plugin 方式能否被 ZCode CLI 正确加载、marketplace 注册细节，建议以 [ZCode 官方 plugin 文档](https://zcode.z.ai/en/docs/plugin) 为准——本仓库 manifest 按其格式配置，但各版本行为可能不同。
+装完新开会话，skill 会出现在可用列表里，自然语言即可触发。
+
+> **关于 ZCode plugin 方式**：ZCode 的 plugin 体系由 Z.ai 官方维护（[zai-org/zai-coding-plugins](https://github.com/zai-org/zai-coding-plugins)，通过 `npx @z_ai/coding-helper` 或 GUI 同步），第三方个人仓库接入其官方 marketplace 的路径不明确。cache 里的 `.zcode-plugin/` 是 ZCode 同步后的内部缓存格式，不是作者源格式。因此 ZCode 下用上面的 skills 目录拷贝，已验证可生效。
+>
+> **同步提醒**：拷贝是快照，源仓库更新（`git pull`）后需重新拷贝才能同步最新版。若想自动同步，可改用 symlink（`ln -s` 或 PowerShell `New-Item -ItemType SymbolicLink`，Windows 需开发者模式/管理员权限）。
 
 ### Claude Code
 
-两种方式：
-
-**方式 A：当 plugin 装**（仓库已配 `.claude-plugin/`）：
+**推荐：作为 plugin 安装**（仓库已配 `.claude-plugin/`）：
 
 ```
 /plugin marketplace add Lion-1209/Lion-Skills
 /plugin install lion-skills@lion-skills
 ```
 
-**方式 B：symlink 到用户级 skills 目录** `~/.claude/skills/`：
+装完即用——12 个 skill 会在合适的时机自动触发。skill 标识带 plugin 前缀（如 `lion-skills:commit-message`），但日常靠自然语言触发即可，无需关心前缀。
 
-```bash
-# macOS/Linux
-for s in /path/to/Lion-Skills/skills/*/; do
-  ln -s "$s" "$HOME/.claude/skills/$(basename "$s")"
-done
+**已装旧版要升级**（0.1.0 的 5 skill → 0.2.0 的 12 skill）：
+
+```
+/plugin marketplace update lion-skills
+/plugin install lion-skills@lion-skills
 ```
 
-```powershell
-# Windows PowerShell
-$skills = Get-ChildItem "E:\path\to\Lion-Skills\skills" -Directory
-foreach ($s in $skills) {
-    New-Item -ItemType SymbolicLink -Path "$HOME\.claude\skills\$($s.Name)" -Target $s.FullName
-}
-```
+> Claude Code 的 plugin 是正经的源格式分发，`/plugin` 命令会处理下载、版本管理、更新。**不要同时把 skill 又拷到 `~/.claude/skills/`**——那会与 plugin 提供的同名 skill 并存、可能重复触发。Claude Code 下用 plugin 一种方式即可。
 
 ### 装完的验证
 
