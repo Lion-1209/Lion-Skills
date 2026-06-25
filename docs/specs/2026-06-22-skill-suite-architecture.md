@@ -1,8 +1,8 @@
 # Lion-Skills 套件架构
 
-- **日期**：2026-06-22
+- **日期**：2026-06-22（2026-06-26 更新：新增 verify-and-fix）
 - **状态**：已实现 + 已验证
-- **范围**：记录 8 个 skill 的流水线关系、协作机制、已验证的协作证据
+- **范围**：记录 9 个 skill 的流水线关系、协作机制、已验证的协作证据
 - **目的**：让后续读者（包括未来的 Claude）一眼看清 skill 之间如何协作，避免把每个 skill 当孤立工具用
 
 > **文档定位**：这是套件级架构索引，不是单个 skill 的设计文档。各 skill 的内部设计见各自的 `SKILL.md`，初始设计意图见 `2026-06-16-lion-skills-design.md`。
@@ -11,11 +11,11 @@
 
 ## 1. 流水线：需求到交付的主链
 
-三个 skill 构成"需求 → 交付"的主链，按顺序协作：
+四个环节构成"需求 → 交付"的主链，按顺序协作：
 
 ```
-clarifying-questions → spec-writing → task-breakdown → 执行
-   (澄清需求)            (写设计文档)    (拆任务)
+clarifying-questions → spec-writing → task-breakdown → [执行 + verify-and-fix]
+   (澄清需求)            (写设计文档)    (拆任务)         (验证完成、修病因)
 ```
 
 | 环节 | skill | 产出 | 何时进入下一环 |
@@ -23,11 +23,13 @@ clarifying-questions → spec-writing → task-breakdown → 执行
 | 澄清 | `clarifying-questions` | 双方对齐的需求理解（含已明决策 + 默认假设 + 未答未知） | 核心方向已明、未答未知不再阻塞方向 |
 | 设计 | `spec-writing` | 可评审的 spec（决策 + 范围 + 验收标准 + TBD） | spec 定稿（阻塞澄清已答、关键 spike 有结论） |
 | 拆解 | `task-breakdown` | 可执行任务清单（垂直切片 + 完成定义 + 研究/执行分离） | 任务可分配/可执行 |
+| 执行验证 | `verify-and-fix` | 经验证的完成（实际跑过的证据、修病因而非症状） | 每个任务的"完成定义"被实际验证通过 |
 
 **关键衔接契约**（上游产出必须满足的、下游消费的）：
 
 - clarifying → spec：clarifying 的"硬问题"被 spec 继承为阻塞澄清项；clarifying 的"默认假设"被 spec 作为候选决策；clarifying 的"未答未知"被 spec 显式列为 TBD。
 - spec → task：spec 的"验收标准"被 task 一一映射到各切片的"完成定义"；spec 的 TBD 对应到 task 的 spike；spec 的范围决定 task 拆什么不拆什么。
+- task → verify-and-fix：task 的"完成定义"是 verify-and-fix 的验证目标——它把 task 纸面上的"做完 X 后能验证 Y"变成"实际跑过 Y 的证据"，不通过就修（修病因不修症状、不为通过弱化检查）。
 
 ---
 
@@ -71,21 +73,23 @@ clarifying-questions → spec-writing → task-breakdown → 执行
 
 - **两环**（spec → task，提交前的验证）：场景"文件上传 + 病毒扫描（服务未选型）"。验证 spec 的验收标准落到 task 完成定义、TBD 对应 spike、依赖方向单向。5 项衔接验证全过。
 - **三环**（clarifying → spec → task，2026-06-22）：场景"内部知识库"。验证 clarifying 的硬问题被 spec 继承、spec 的验收标准被 task 映射、三环方向零漂移。5 项衔接验证全过。
+- **task → verify-and-fix 衔接**（2026-06-26，随 verify-and-fix 三轮验证）：verify-and-fix 的验证目标即 task-breakdown 的"完成定义"——把纸面标准变成实际跑过的证据。三轮 evals（声称完成未验证 / 为通过弱化检查 / 修症状不修病因 + 重构回归 / 断言灰度 / 防回归测试）共 9 次测试 × 40+ 检查点全过，且与 task-breakdown 的"完成定义"概念对齐。
 
-两次串跑共同证明：三个 skill 的时机判断逻辑互相一致（都正确识别"现在不该硬写 spec / 不该硬拆"），衔接契约成立。
+两次串跑 + verify-and-fix 三轮共同证明：主链各环节的时机判断与衔接契约成立。
 
 ---
 
 ## 6. 何时该用单个 skill，何时该走流水线
 
-不是所有任务都要走完整三环。判断：
+不是所有任务都要走完整主链。判断：
 
-- **小改动 / 明确需求** → 直接做，最多用 commit-message。
-- **中等需求（方向明但有设计决策）** → spec-writing 单独用，或 spec-writing → task-breakdown 两环。
-- **大需求 / 模糊需求 / 高风险方案** → 完整三环 clarifying → spec → task。
+- **小改动 / 明确需求** → 直接做，用 verify-and-fix 验证 + commit-message 提交。
+- **中等需求（方向明但有设计决策）** → spec-writing 单独用，或 spec-writing → task-breakdown → verify-and-fix。
+- **大需求 / 模糊需求 / 高风险方案** → 完整主链 clarifying → spec → task → verify-and-fix。
+- **修任何 bug** → verify-and-fix（无论需求大小，修完都要经验证完成）。
 - **接手陌生代码库** → onboarding-unknown-codebase，与主链解耦。
 
-误用流水线和误用单个 skill 一样有害——小需求套三环是流程负担，大需求跳过澄清是返工源头。
+误用流水线和误用单个 skill 一样有害——小需求套全链是流程负担，大需求跳过澄清是返工源头。
 
 ---
 
@@ -93,8 +97,8 @@ clarifying-questions → spec-writing → task-breakdown → 执行
 
 按 spec-writing 规范，定义"这份文档怎样算成功"：
 
-- 读者能在 5 分钟内看清 8 个 skill 的关系，不必读完 8 个 SKILL.md 才理解协作
-- 流水线主链（3 skill）+ 横切（4 skill）+ 元（1 skill）的分层清晰
+- 读者能在 5 分钟内看清 9 个 skill 的关系，不必读完 9 个 SKILL.md 才理解协作
+- 流水线主链（4 环节）+ 横切（4 skill）+ 元（1 skill）的分层清晰
 - 衔接契约（上下游产出对齐）显式写出，不是隐含
 - 已验证的协作有证据引用（提交 hash + 验证场景）
 - 文档自身符合 spec-writing 的精简原则（决策为主、不堆背景）
