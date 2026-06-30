@@ -1,6 +1,6 @@
 ---
 name: testing
-description: 当需要为代码写测试、或改进已有测试时使用。典型信号：用户说"帮我写测试""给这个函数加单测""测一下这个""测试怎么写"、写完功能要补测试、觉得现有测试脆弱(改实现就崩)、纠结测什么不测什么、纠结要不要 mock、讨论测试覆盖率、测试抓不住 bug。涉及关键词：写测试、单元测试、单测、集成测试、测试用例、test case、测试覆盖、coverage、mock、stub、fixture、测试金字塔、行为测试、脆弱测试、flaky test、TDD。
+description: 写能抓住 bug 的测试，或改进脆弱测试。涉及关键词：写测试、单元测试、单测、集成测试、测试用例、coverage、mock、fixture、flaky test、TDD。
 ---
 
 # Testing

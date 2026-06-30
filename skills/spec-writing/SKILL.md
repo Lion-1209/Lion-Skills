@@ -1,6 +1,6 @@
 ---
 name: spec-writing
-description: 当用户需要为一个功能/重构/方案写设计文档(spec/design doc/RFC)时使用。典型信号：用户说"帮我写个设计文档""写个 spec""出个技术方案""写个 RFC""这个功能怎么设计/方案怎么定"、要做一个非平凡功能想先写设计、要做重构/迁移想先定方案、要把脑里的想法固化成可评审文档、已有草稿想让审查写得好不好。涉及关键词：设计文档、spec、技术方案、设计书、RFC、design doc、方案设计、技术选型文档、架构设计、写设计、设计评审、design review。
+description: 写可评审、可追溯的设计文档（spec/design doc/RFC）。涉及关键词：设计文档、spec、技术方案、RFC、design doc、方案设计、架构设计、设计评审。
 ---
 
 # Spec Writing

@@ -1,6 +1,6 @@
 ---
 name: lion-writing-skills
-description: 当用户想在 Lion-Skills 仓库里创建新 skill、修改现有 skill、或检查 skill 是否符合本仓库规范时使用。典型信号：用户说"帮我加个新 skill""写个 skill""创建一个 skill""这个 skill 怎么改/优化""检查这个 skill 写得对不对"、想把某个重复的工作流沉淀成 skill、想给 Lion-Skills 套件加成员。涉及关键词：创建 skill、写 skill、新 skill、lion-skills、SKILL.md、skill 模板、skill 规范、验证 skill。
+description: 在 Lion-Skills 仓库里创建或修改 skill，确保符合规范。涉及关键词：创建 skill、写 skill、新 skill、SKILL.md、skill 模板、skill 规范。
 ---
 
 # Lion Writing Skills

@@ -1,6 +1,6 @@
 ---
 name: debugging
-description: 当需要定位 bug 的根因、或调试卡住不知从何下手时使用。典型信号：用户说"这里报错怎么排查""帮我看看这个 bug""为什么 X 不工作""程序崩了不知道哪的问题"、遇到报错/崩溃/行为异常要定位原因、bug 不稳定复现、改了好几处都不行陷入循环、看了代码没发现问题、想加 try/catch 把错误盖住。涉及关键词：调试、debug、排查、定位 bug、找根因、复现、最小复现、报错、堆栈、stack trace、二分法、bisect、假设验证、shotgun debugging、乱改、偶发 bug、flaky。
+description: 定位 bug 根因或调试卡住时，用科学方法缩小范围。涉及关键词：debug、排查、定位 bug、根因、复现、stack trace、二分法、bisect、shotgun debugging、flaky。
 ---
 
 # Debugging

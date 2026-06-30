@@ -1,6 +1,6 @@
 ---
 name: onboarding-unknown-codebase
-description: 当用户需要快速上手或理解一个陌生的代码库/项目时使用。典型信号：用户说"帮我看懂这个项目""我刚接手 xx""这个代码库是干啥的""怎么快速熟悉这个项目""这个项目的结构/架构""入口在哪"、clone 了新 repo 不知从哪读起、要给同事讲清一个项目、接手离职同事留下的代码。涉及关键词：上手、熟悉、理解、读代码、看懂项目、项目架构、入口、目录结构、代码导航、onboarding、codebase。
+description: 快速上手陌生代码库，系统化理解项目结构与架构。涉及关键词：上手、熟悉、读代码、看懂项目、项目架构、入口、目录结构、onboarding、codebase。
 ---
 
 # Onboarding Unknown Codebase

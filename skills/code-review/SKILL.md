@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: 当需要审查代码(自己的或别人的)、或想让别人 review 自己的代码时使用。典型信号：用户说"帮我 review 一下""看看这段代码有没有问题""审查一下这个 PR""code review 一下"、提交前把关、同事让你看他的代码、review 别人代码不知从何看起、觉得自己 review 流于表面。涉及关键词：代码审查、code review、review、审查、CR、PR review、检查代码、挑问题、严重度、nit、阻塞、approve、ratchet。
+description: 审查代码，有重点、分层次地看。涉及关键词：code review、review、审查、CR、PR review、严重度、nit、阻塞。
 ---
 
 # Code Review

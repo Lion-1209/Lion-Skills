@@ -1,6 +1,6 @@
 ---
 name: commit-message
-description: 当用户需要为 Git 改动编写或优化提交信息（commit message）时使用。典型信号：用户说"帮我写 commit message""这次改动怎么提交""提交说明怎么写""git commit 写啥"、刚看完 diff 准备提交、一次改了多处不知怎么概括、或现有提交信息太笼统（如"update""改了下"）需要改成规范写法。涉及关键词：commit message、提交信息、提交说明、git commit、Conventional Commits、feat/fix、commitizen、提交规范、changelog。
+description: 为 Git 改动编写或优化提交信息。涉及关键词：commit message、git commit、Conventional Commits、feat/fix、commitizen、提交规范。
 ---
 
 # Commit Message
