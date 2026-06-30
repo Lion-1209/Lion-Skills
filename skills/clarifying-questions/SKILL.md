@@ -1,6 +1,6 @@
 ---
 name: clarifying-questions
-description: 需求模糊、含隐藏假设或疑似 X-Y problem 时，先澄清再动手。涉及关键词：需求澄清、X-Y problem、隐含假设、需求不明确、需求模糊。
+description: 需求模糊、含隐藏假设或 X-Y problem，需先澄清再动手时。
 ---
 
 # Clarifying Questions

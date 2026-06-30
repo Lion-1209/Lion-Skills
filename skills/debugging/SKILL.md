@@ -1,6 +1,6 @@
 ---
 name: debugging
-description: 定位 bug 根因或调试卡住时，用科学方法缩小范围。涉及关键词：debug、排查、定位 bug、根因、复现、stack trace、二分法、bisect、shotgun debugging、flaky。
+description: 遇到 bug、报错、崩溃或行为异常，需定位根因时。
 ---
 
 # Debugging

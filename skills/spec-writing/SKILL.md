@@ -1,6 +1,6 @@
 ---
 name: spec-writing
-description: 写可评审、可追溯的设计文档（spec/design doc/RFC）。涉及关键词：设计文档、spec、技术方案、RFC、design doc、方案设计、架构设计、设计评审。
+description: 需为非平凡功能/重构写设计文档（spec/design doc/RFC）时。
 ---
 
 # Spec Writing

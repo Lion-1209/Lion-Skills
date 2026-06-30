@@ -1,6 +1,6 @@
 ---
 name: onboarding-unknown-codebase
-description: 快速上手陌生代码库，系统化理解项目结构与架构。涉及关键词：上手、熟悉、读代码、看懂项目、项目架构、入口、目录结构、onboarding、codebase。
+description: 需快速上手陌生代码库、理解项目结构时。
 ---
 
 # Onboarding Unknown Codebase

@@ -1,6 +1,6 @@
 ---
 name: error-handling
-description: 设计或改进错误处理与日志，做到可观测、可区分、不吞。涉及关键词：错误处理、try/catch、抛异常、错误码、日志、logging、重试、retry、边界情况、防御性编程。
+description: 设计或改进错误处理与日志时。
 ---
 
 # Error Handling

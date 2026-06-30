@@ -1,6 +1,6 @@
 ---
 name: lion-writing-skills
-description: 在 Lion-Skills 仓库里创建或修改 skill，确保符合规范。涉及关键词：创建 skill、写 skill、新 skill、SKILL.md、skill 模板、skill 规范。
+description: 在 Lion-Skills 仓库创建或修改 skill 时。
 ---
 
 # Lion Writing Skills

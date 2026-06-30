@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: 审查代码，有重点、分层次地看。涉及关键词：code review、review、审查、CR、PR review、严重度、nit、阻塞。
+description: 审查代码（自己的或别人的），需有重点、分层次地看时。
 ---
 
 # Code Review

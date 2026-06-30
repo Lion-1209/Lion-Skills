@@ -1,6 +1,6 @@
 ---
 name: commit-message
-description: 为 Git 改动编写或优化提交信息。涉及关键词：commit message、git commit、Conventional Commits、feat/fix、commitizen、提交规范。
+description: Git 改动需编写规范提交信息时。
 ---
 
 # Commit Message

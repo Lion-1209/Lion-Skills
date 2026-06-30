@@ -1,6 +1,6 @@
 ---
 name: verify-and-fix
-description: 把"声称完成"变成"经验证完成"，修病因而非症状。涉及关键词：验证、跑测试、确认完成、修 bug、根因、病因、症状、改断言、跳过测试、循环修复。
+description: 交付前需验证完成，或修 bug 需修病因不修症状时。
 ---
 
 # Verify and Fix

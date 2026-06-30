@@ -1,6 +1,6 @@
 ---
 name: testing
-description: 写能抓住 bug 的测试，或改进脆弱测试。涉及关键词：写测试、单元测试、单测、集成测试、测试用例、coverage、mock、fixture、flaky test、TDD。
+description: 需为代码写测试或改进脆弱测试时。
 ---
 
 # Testing

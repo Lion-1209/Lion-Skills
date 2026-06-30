@@ -1,6 +1,6 @@
 ---
 name: task-breakdown
-description: 把需求拆成可执行的端到端任务，排序依赖。涉及关键词：任务拆解、WBS、拆任务、开发计划、任务清单、任务排序、依赖关系、迭代计划、需求拆分。
+description: 需把需求拆成可执行任务并排依赖时。
 ---
 
 # Task Breakdown
